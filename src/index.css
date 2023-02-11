@@ -1,4 +1,50 @@
 *{
-    background-color: #010101;
+    background-color: #28282B;
     color: #fff;
+}
+h1{
+    text-align: center;
+    margin: 10px;
+}
+.form{
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1rem;
+    margin:auto;
+    max-width: 600px;
+}
+.form input, .form textarea{
+    margin-bottom: 1rem;
+    padding: 10px 18px;
+    font-size:1.2rem;
+    background-color: rgba(255, 255, 255,0.1);
+    border-color: rgba(255, 255, 255,0.1) ;
+    color: white;
+}
+label{
+    color: white;
+    margin-bottom: 0.5rem;
+}
+
+.bttn{
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: grey;
+    transition: 0.2s linear ;
+}
+.bttn:hover{
+    background-color: white;
+    color: black;
+}
+.bttn2{
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgb(39, 176, 210);
+    transition: 0.2s linear ;
+}
+.bttn2:hover{
+    background-color: rgb(39, 106, 210);
+    color: black;
 }

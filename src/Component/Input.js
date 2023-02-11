@@ -1,61 +1,81 @@
-import "./Input.css";
-import React from 'react';
-import { useForm, ValidationError } from '@formspree/react';
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 
 function Input() {
-  const [state, handleSubmit] = useForm("mzbqeezd");
-  if (state.succeeded) {
-      return <p className="returnText">Your message has been recieved. I will contact you shortly...</p>;
-  }
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAdd] = useState("");
+  const [tasks, setTasks] = useState([]);
+  const addTask = (e) => {
+    if (name && email && phone && address) {
+      const newTask = { id: new Date().getTime().toString(), name: name, email:email,phone:phone,address:address };
+      setTasks([...tasks, newTask]);
+      localStorage.setItem("localMember", JSON.stringify([...tasks, newTask]));
+      setName("");
+      setEmail("");
+      setPhone("");
+      setAdd("");
+    }
+  };
   return (
-      <form onSubmit={handleSubmit}>
-      <label htmlFor="text">
+    <>
+    <h1>Add Member</h1>
+      <div className="form">
+      <label>
         Name
       </label>
       <input
-        id="name"
-        type="text" 
-        name="name"
-      />
-      <label htmlFor="email">
-        Email Address
+          name="name"
+          type="text"
+          value={name}
+          placeholder="Write your name..."
+          className="form-control"
+          onChange={(e) => setName(e.target.value)}
+        />
+        <label>
+        Email
       </label>
-      <input
-        id="email"
-        type="email" 
-        name="email"
-      />
-      <ValidationError 
-        prefix="Email" 
-        field="email"
-        errors={state.errors}
-      />
-      <label htmlFor="text">
-        Subject
+        <input
+          name="email"
+          type="email"
+          value={email}
+          placeholder="Write your email..."
+          className="form-control"
+          onChange={(e) => setEmail(e.target.value)}
+        />
+<label>
+        Phone  Number
       </label>
-      <input
-        id="Subject"
-        type="text" 
-        name="Subject"
-      />
-      <label htmlFor="Message">
-        Message
+        <input
+          name="phone"
+          type="number"
+          value={phone}
+          placeholder="Write your phone..."
+          className="form-control"
+          onChange={(e) => setPhone(e.target.value)}
+        />
+<label>
+        Address
       </label>
-      <textarea
-        id="message"
-        name="message"
-      />
-      <ValidationError 
-        prefix="Message" 
-        field="message"
-        errors={state.errors}
-      />
+        <input
+          name="address"
+          type="text"
+          value={address}
+          placeholder="Write your address..."
+          className="form-control"
+          onChange={(e) => setAdd(e.target.value)}
+        />
 
-      <button type="submit" className="btn" disabled={state.submitting}>
+      <button type="submit" className="bttn" onClick={addTask}>
         Submit
       </button>
-    </form>
+      <Link to="/display"><button type="submit" className="bttn2">
+        Display Member
+      </button></Link>
+    </div>
+    </>
   );
 }
 export default Input
